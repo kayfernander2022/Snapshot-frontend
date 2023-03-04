@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Snapshot App 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Snapshot is a React frontend application using typescript where the user can upload and edit photos and add or delete from a friends list.
 
-## Available Scripts
+### [Link to Image App]() ON NETLIFY
 
-In the project directory, you can run:
+### Technologies Used
 
-### `npm start`
+- React
+- react-router-dom
+- TypeScript
+- CSS
+- imageKit
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Component Architecture
 
-### `npm test`
+[![](https://mermaid.ink/img/pako:eNp9UsluwjAQ_ZXIp1QCRS1tDzlUAsK-HaAnwsGKBxKVxJHjiFaIf689E4Fpq-aUeYve89hnlkgBLGT7ozwlKVfa20Rx4Zmvu-2W5c5rt996_qrWR9APRPQs5vX9ugLVQH2Eom3MgpjtHGxgoTKVWgZhJu45b2jJRAHX8MPmjSxVl8JSv41jywowle7ZCNlJIeCTgAEC61SeaB7ijH36mNtNdCYLIkc38h2TXXJ8IyMMdklqNfH3KoNCVM1SJohOTVe7qSATAReCJIFFnOJTlFKqa545Zjrv3_4Z7R8V7iXN_SznB2gKzRFb-GtzzyA2soEXCC9NFIrtRoMKJebWKMg2v4aRfvWvnspeLUu0PD51OjSvcH5-eWUtloPKeSbMGzxbMmY6hdxYQ_MruPqIWVxcjI7XWq6_ioSFWtXQYvQ6oowfFM9ZuOfHCi7fukDTwg?type=png)](https://mermaid.live/edit#pako:eNp9UsluwjAQ_ZXIp1QCRS1tDzlUAsK-HaAnwsGKBxKVxJHjiFaIf689E4Fpq-aUeYve89hnlkgBLGT7ozwlKVfa20Rx4Zmvu-2W5c5rt996_qrWR9APRPQs5vX9ugLVQH2Eom3MgpjtHGxgoTKVWgZhJu45b2jJRAHX8MPmjSxVl8JSv41jywowle7ZCNlJIeCTgAEC61SeaB7ijH36mNtNdCYLIkc38h2TXXJ8IyMMdklqNfH3KoNCVM1SJohOTVe7qSATAReCJIFFnOJTlFKqa545Zjrv3_4Z7R8V7iXN_SznB2gKzRFb-GtzzyA2soEXCC9NFIrtRoMKJebWKMg2v4aRfvWvnspeLUu0PD51OjSvcH5-eWUtloPKeSbMGzxbMmY6hdxYQ_MruPqIWVxcjI7XWq6_ioSFWtXQYvQ6oowfFM9ZuOfHCi7fukDTwg)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend Route Table
 
-### `npm run build`
+| Route    | Element    | Loader |Action| Description|
+| :---    | :----: | :----:    | :----   |:----   |
+|/        |Index  | indexLoader|         |Display a list of photos|
+|/photo/:id |Show   | artLoader  |          |Display a specific photo|
+|/create  |Create |         | photoCreateAction|Handles submission of create form for photo|
+|/update/:id  |Update |      |photoUpdateAction|Handles submission of update form for photo|
+|/delete/:id |Delete |       |photoDeleteAction|Handles submission of delete form for photo|
+|/sharedphotos        |Index  | sharedIndexLoader|         |Display a list of friends photos|
+|/sharedphotos/photoid/user/:userid        |Update  | |     sharedPhotoUpdateAction    |Share photo to the user|
+|/sharedphotos/photoid/user/:userid        |Delete  | |  sharedPhotoDeleteAction       |Delete a shared photo from the user|
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Mockups
+![mockups here](./public/capstone-wireframe.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### Trello Workspace
+[TRELLO BOARD](https://trello.com/b/eR1U7DMT/capstone)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+###### 2023 Karen Fernander |
