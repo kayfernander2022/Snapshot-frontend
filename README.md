@@ -1,16 +1,16 @@
 # Snapshot App 
 
-Snapshot is a React frontend application using typescript where the user can upload and edit photos and add or delete from a friends list.
+Snapshot is a React + Typescript frontend application where the user can upload, edit, and share photos with friends.
 
-### [Link to Image App]() ON NETLIFY
+### [Link to Snapshot]() ON NETLIFY
 
 ### Technologies Used
 
 - React
-- react-router-dom
-- TypeScript
+- Typescript
+- HTML
 - CSS
-- imageKit
+- ImageKit CDN
 
 
 ### Component Architecture
@@ -21,14 +21,18 @@ Snapshot is a React frontend application using typescript where the user can upl
 
 | Route    | Element    | Loader |Action| Description|
 | :---    | :----: | :----:    | :----   |:----   |
-|/        |Index  | indexLoader|         |Display a list of photos|
-|/photo/:id |Show   | artLoader  |          |Display a specific photo|
-|/create  |Create |         | photoCreateAction|Handles submission of create form for photo|
-|/update/:id  |Update |      |photoUpdateAction|Handles submission of update form for photo|
-|/delete/:id |Delete |       |photoDeleteAction|Handles submission of delete form for photo|
-|/sharedphotos        |Index  | sharedIndexLoader|         |Display a list of friends photos|
-|/sharedphotos/photoid/user/:userid        |Update  | |     sharedPhotoUpdateAction    |Share photo to the user|
-|/sharedphotos/photoid/user/:userid        |Delete  | |  sharedPhotoDeleteAction       |Delete a shared photo from the user|
+|/        |Index  | photosLoader|         |Display a list of photos|
+|/user/:id | Show | userLoader | | Display user profile info |
+|/user/create | Create | | userCreateAction  | Handles creation form for new user |
+|/user/:id/update | Update | | userUpdateAction | Handles creation form for update user | 
+|/user/:id/delete| Delete | | userDeleteAction| Handles deletion of specific user |
+|/photo/:id |Show   | photoLoader  |          |Display a specific photo|
+|/photo/create  |Create |         | photoCreateAction|Handles submission of create form for photo|
+|/photo/:id/update  |Update |      |photoUpdateAction|Handles submission of update form for photo|
+|/photo/:id/delete |Delete |       |photoDeleteAction|Handles submission of delete form for photo|
+|/sharedphotos        |Index  | sharedPhotosLoader|         |Display a list of friends photos|
+|/sharedphotos/:photoid/user/:userid        |Update  | |     sharedPhotoUpdateAction    |Share photo to the user|
+|/sharedphotos/:photoid/user/:userid/delete        |Delete  | |  sharedPhotoDeleteAction       |Delete a shared photo from the user|
 
 
 ### Mockups
