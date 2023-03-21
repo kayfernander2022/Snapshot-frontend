@@ -11,9 +11,12 @@ const Router : React.FunctionComponent<IApplicationProps> = (props) => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App/>}>
-          
+          <Route path="home" element={<Home/>}/>
+          <Route path="myphotos" element={<Home/>}/>
+          <Route path="friends" element={<Home/>}/>
+          <Route path="login" element={<Home/>}/>
+          <Route path="logout" element={<Home/>}/>
         </Route>
-        <Route path="home" element={<Home/>}/>
       </Routes>
     </BrowserRouter>
   )
