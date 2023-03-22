@@ -8,7 +8,7 @@ export interface INavProps{
 
 export const NavMenu: React.FC<INavProps> = props => {
   
-  const loggedIn = true; // toggle the menu items based on if logged in or not
+  const loggedIn = false; // toggle the menu items based on if logged in or not
 
   return (
       <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
