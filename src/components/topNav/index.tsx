@@ -8,7 +8,7 @@ import $ from 'jquery'
 import './style.scss'
 import NavMenu, {INavProps} from './navMenu';
 
-export const TopNav: React.FC<INavProps> = props => {
+export const TopNav: React.FC<INavProps> = (props: INavProps) => {
   const [variant, setVariant] = useState<NavbarProps['variant']>('light')
 
   useEffect(() => {
@@ -53,6 +53,6 @@ export const TopNav: React.FC<INavProps> = props => {
           <NavMenu {...props} />
       </Navbar>
       
-      //<Nav.Link><
+    
   )
 }

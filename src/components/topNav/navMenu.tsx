@@ -1,25 +1,24 @@
 import React, { useContext } from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
-import { GlobalCtx } from '../../GlobalCtx'
+import { useAuthContext } from '../../useAuthCtx'
+import User from '../../models/user'
 
 export interface INavProps{
-
 }
 
-export const NavMenu: React.FC<INavProps> = props => {
-  
-  const { token, setGlobalToken } = useContext(GlobalCtx);
+export const NavMenu: React.FC<INavProps> = (props: INavProps) => {
+  const { currentUser, setUserContext } = useAuthContext();
   const [loggedIn, setLoggedIn] = React.useState(false); // toggle the menu items based on if logged in or not
 
   const logoutOnClick = () => {
-    window.localStorage.removeItem("token");
-    setGlobalToken(undefined);
+    setUserContext(undefined);
   }
 
   React.useEffect(()=>{
-    setLoggedIn(token!==undefined)
-  }, [token])
+    setLoggedIn(currentUser ? currentUser?.token !== undefined : false)
+  }, [currentUser, currentUser?.token])
+
   return (
       <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
           <Nav className="ml-auto" defaultActiveKey="#home">

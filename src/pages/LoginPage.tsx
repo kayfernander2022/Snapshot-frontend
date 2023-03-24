@@ -1,18 +1,22 @@
 import React from "react";
-import { GlobalCtx } from "../GlobalCtx";
+import User from '../models/user';
+import { useAuthContext } from "../useAuthCtx";
+import { useNavigate } from 'react-router-dom';
 
 export interface ILoginPageProps {
   
 }
- 
+
+
 const LoginPage: React.FunctionComponent<ILoginPageProps> = () => {
 // Destructuring the global state and the setter function from the GlobalCtx context
-const { url, setGlobalToken } = React.useContext(GlobalCtx);
+const navigate = useNavigate();
+const {url, setUserContext } = useAuthContext();
 
 const [hasAccount, setHasAccount ] = React.useState(true);
 
 // Setting an initial state for the form to be empty
-const blank = {
+const blank: User = {
   username: "",
   password: "",
 }
@@ -29,29 +33,27 @@ const handleChange = (event: any) => {
 const handleLogin = (event: any) => {
   // Preventing the default form submission behavior
   event.preventDefault()
-  // Destructuring the username and password from the form state
-  const {username, password} = form
+
   // Making a post request to the server using fetch with the username and password in the body
   fetch(`${url}/api/users/login`, {
       method: "post",
       headers: {
           "Content-Type": "application/json"
       },
-      body: JSON.stringify({username, password})
+      body: JSON.stringify(form)
   })
   // Parsing the response as json
   .then(response => response.json())
   .then(data => {
       // Logging the data from the response
       console.log(data)
-      // Saving the token from the response in local storage
-      window.localStorage.setItem("token", JSON.stringify(data))
+     
       // Updating the global state with the token
-      setGlobalToken(data.token)
+      setUserContext({...data})
       // Clearing the form state
       setForm(blank)
       // Navigating to the home page
-      window.location.assign('/home')
+      navigate('/home');
   })
 }
 
@@ -59,20 +61,20 @@ const handleLogin = (event: any) => {
     // it sends a post request to the server to create a new user account
     const handleSignup = (event: any) => {
       event.preventDefault() // prevent the default form submission behavior
-      const {username, password} = form
+      
       fetch(`${url}/api/users`, {
           method: "post", // request method is set to "post"
           headers: {
               "Content-Type": "application/json" // set the request headers
           },
-          body: JSON.stringify({username, password}) // send the form data in the request body
+          body: JSON.stringify(form) // send the form data in the request body
       })
       .then(response => response.json()) // parse the response as JSON
       .then(data => {
           console.log(data) // log the server response to the console
           setForm(blank) // reset the form
           setHasAccount(!hasAccount);
-          window.location.assign('/login') // redirect the user to the login page
+          navigate('/login');
       })
   }
 
