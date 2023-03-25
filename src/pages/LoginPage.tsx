@@ -19,6 +19,7 @@ const [hasAccount, setHasAccount ] = React.useState(true);
 const blank: User = {
   username: "",
   password: "",
+  name:""
 }
 
 // Using the useState hook to create a state variable for the form and a setter function
@@ -50,6 +51,9 @@ const handleLogin = (event: any) => {
      
       // Updating the global state with the token
       setUserContext({...data})
+
+      window.localStorage.setItem('currentUser', JSON.stringify({id: data.id, token: data.token, name: data?.name || 'guest'}));
+
       // Clearing the form state
       setForm(blank)
       // Navigating to the home page

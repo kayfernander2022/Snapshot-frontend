@@ -3,6 +3,7 @@ export default interface User{
   token?:string | undefined
   username: string;
   password: string;
+  name:string;
 }
 
 

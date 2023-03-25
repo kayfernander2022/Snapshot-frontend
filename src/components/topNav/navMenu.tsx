@@ -12,10 +12,18 @@ export const NavMenu: React.FC<INavProps> = (props: INavProps) => {
   const [loggedIn, setLoggedIn] = React.useState(false); // toggle the menu items based on if logged in or not
 
   const logoutOnClick = () => {
+    window.localStorage.removeItem('currentUser');
     setUserContext(undefined);
   }
 
   React.useEffect(()=>{
+    if(!currentUser){
+      const localStoreUser = window.localStorage.getItem('currentUser') !== null ? JSON.parse(window.localStorage.getItem('currentUser')!) : undefined;
+      if(localStoreUser)
+      {
+        setUserContext({id: localStoreUser.id, username:'masked', password:'masked', token: localStoreUser.token, name:localStoreUser.name})
+      }
+    }
     setLoggedIn(currentUser ? currentUser?.token !== undefined : false)
   }, [currentUser, currentUser?.token])
 
@@ -29,12 +37,12 @@ export const NavMenu: React.FC<INavProps> = (props: INavProps) => {
               </Nav.Link>
           </LinkContainer>}
           {loggedIn && 
-            <LinkContainer to="/MyPhotos">
+            <LinkContainer to={`${currentUser?.id}/MyPhotos`}>
               <Nav.Link>
                  My Photos
               </Nav.Link>
             </LinkContainer> }
-            { loggedIn && <LinkContainer to="/Friends">
+            { loggedIn && <LinkContainer to={`${currentUser?.id}/Friends`}>
               <Nav.Link>
                  Friends
               </Nav.Link>

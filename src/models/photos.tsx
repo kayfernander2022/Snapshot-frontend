@@ -1,5 +1,7 @@
 export default interface Photos{
-  imageUrl: String;
-  caption: String;
-  userId: String;
+  id:string,
+  imageUrl: string;
+  imageName?:string;
+  caption: string;
+  userId: string;
 }

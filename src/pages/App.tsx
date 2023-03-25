@@ -29,7 +29,7 @@ const App: React.FunctionComponent<IAppProps> = (props: IAppProps) => {
           <div style={{justifyContent:'center', alignItems:'center', display:'flex', position:'absolute', width:'100%', height:'100%'}}>
             <Outlet/>
           </div>
-          </div>
+    </div>
     </AuthProvider>
   );
 }

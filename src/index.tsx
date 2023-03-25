@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Router from './Router';
-import { TopNav } from './components/topNav';
-import { AuthProvider } from './useAuthCtx';
+import {RouterProvider} from 'react-router-dom';
+
+import {Router} from './Router';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <React.StrictMode>
-      <Router/>
+      <RouterProvider router={Router}/>
   </React.StrictMode>
 );
 

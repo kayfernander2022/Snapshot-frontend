@@ -1,4 +1,6 @@
 export default interface Friend{
-  userId: number;
-  friendId: number;
+  id:string;
+  userId: string;
+  friendId: string;
+  name: string;
   }
