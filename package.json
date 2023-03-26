@@ -15,6 +15,7 @@
     "@types/react-dom": "^18.0.11",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.2.3",
+    "imagekitio-react": "^2.0.0",
     "jquery": "^3.6.4",
     "node-sass": "^7.0.3",
     "normalize.css": "^8.0.1",
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^5.2.6",
+    "@types/imagekit": "^3.1.2",
     "@types/jquery": "^3.5.16",
     "@types/node": "^18.15.2",
     "@types/prop-types": "^15.7.5",

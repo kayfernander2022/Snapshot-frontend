@@ -1,7 +1,7 @@
 export default interface Photos{
-  id:string,
+  id?:string,
   imageUrl: string;
   imageName?:string;
   caption: string;
-  userId: string;
+  userId: string | undefined;
 }

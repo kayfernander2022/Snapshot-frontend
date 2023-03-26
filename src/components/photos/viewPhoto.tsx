@@ -1,12 +1,15 @@
-import React, { FormEvent, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Photos from '../../models/photos'
 import Card from 'react-bootstrap/Card'
-import Button, { ButtonProps } from 'react-bootstrap/Button';
+import { Button, InputGroup } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../useAuthCtx';
-import { updatePhotoAction } from '../../actions/photoActions';
+import { updatePhotoAction, deletePhotoAction } from '../../actions/photoActions';
+import { IKContext, IKUpload } from "imagekitio-react";
+import { imageKitAuthUrl } from '../../urls';
+import { UploadResponse } from "imagekit";
 
 export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
   const {photo} = {...props};
@@ -14,6 +17,7 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
   const { url, currentUser } = useAuthContext(); 
   const [formData, setFormData] = useState(photo);
   const [showModal, setShowModal] = useState(false);
+  const [currImg, setCurrImg] = useState(photo.imageUrl);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -35,7 +39,11 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
 
   const deleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    navigate(`/${currentUser?.id}/myphotos/${photo.id}/delete`);
+    if(photo.id)
+    {
+        deletePhotoAction({url, photoId: photo.id});
+        navigate(`/${currentUser?.id}/myphotos`);
+    }
   }
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -43,11 +51,24 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
     console.log(JSON.stringify(formData));
     if(currentUser)
     {
-      updatePhotoAction({url, userId: currentUser.id, photo: formData})
+      updatePhotoAction({url, photo: formData})
     }
     hideUpdate();
     navigate(`/${currentUser?.id}/myphotos`);
   }
+
+  function onError(err: Error):void{
+    console.log(err);
+  }
+
+  function onSuccess(response: UploadResponse){
+    setCurrImg(response.url)
+    console.log(response.url)
+    setFormData((formData) => ({...formData, imageUrl:response.url}))
+  }
+
+  const inputRefTest = useRef<HTMLInputElement>(null);
+  const ikUploadRefTest = useRef(null);
 
   return (
     <>
@@ -71,16 +92,32 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
               <Form.Control id='imageName' name='imageName' type='input' defaultValue={photo.imageName} onChange={handleChange}/>
               <label htmlFor='imageName'>Image Name: </label>
             </Form.Floating>
+            <InputGroup className='mb-3'>
+            <IKContext publicKey="public_33FjszinEBzlgrIz8+HbC3JVASM=" urlEndpoint="https://ik.imagekit.io/jfpi8d5c5/capstone" authenticationEndpoint={imageKitAuthUrl}>
+            <IKUpload style={{display:'none'}}
+              folder={'/capstone'}
+              onError={(error)=>{onError(error)}}
+              onSuccess={(response)=>{onSuccess(response)}}
+              inputRef={inputRefTest}
+              ref={ikUploadRefTest}
+            />
+             {inputRefTest && <Button onClick={() => inputRefTest?.current?.click()}>
+                  Upload
+              </Button>}
+          </IKContext>
+         
             <Form.Floating className='mb-3'>
-              <Form.Control id='imageUrl' name='imageUrl' type='input' defaultValue={photo.imageUrl} onChange={handleChange}/>
+              <Form.Control id='imageUrl' name='imageUrl' type='input' defaultValue={currImg} value={currImg} disabled/>
               <label htmlFor='imageUrl'>Image Url: </label>
             </Form.Floating>
+            </InputGroup>
             <Form.Floating className='mb-3'>
               <Form.Control id='caption' name='caption' type='input' defaultValue={photo.caption} onChange={handleChange}/>
               <label htmlFor='caption'>Image Caption: </label>
             </Form.Floating>
         </Modal.Body>
         <Modal.Footer>
+       
           <Button variant='secondary' onClick={hideUpdate}>Close</Button>
           <Button variant='primary' onClick={handleSubmit}>Save</Button>
         </Modal.Footer>

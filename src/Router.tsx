@@ -8,7 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import LogoutPage from './pages/LogoutPage';
 import ViewPhotoPage from "./pages/ViewPhotoPage";
 import { userPhotosLoader, photoLoader } from "./loaders/photosLoader";
-
+import { deletePhotoAction } from "./actions/photoActions";
 
 export const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,8 +17,6 @@ export const Router = createBrowserRouter(
             <Route path=":userId/myphotos" element={<PhotosPage/>} loader={userPhotosLoader}/>
             <Route path=":userId/myphotos/:photoId" element={<ViewPhotoPage/>} loader={photoLoader}/>
             <Route path=":userId/myphotos/:photoId/share" element={<Home/>}/>
-            <Route path=":userId/myphotos/:photoId/update" element={<Home/>}/>
-            <Route path=":userId/myphotos/:photoId/delete" element={<Home/>}/>
             <Route path=":userId/friends" element={<FriendsPage/>}/>
             <Route path="login" element={<LoginPage/>}/>
             <Route path="logout" element={<LogoutPage/>}/>
