@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import Photos from '../../models/photos'
 import Card from 'react-bootstrap/Card'
-import { Button, InputGroup } from 'react-bootstrap';
+import { Button, InputGroup, Stack } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
@@ -73,12 +73,14 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
   return (
     <>
     <Card className="shadow-sm">
-      <Card.Img variant="top" src={photo.imageUrl} alt={photo.imageName || 'user photo'} style={{height:'500px'}}/>
+      <Card.Img variant="top" src={photo.imageUrl} alt={photo.imageName || 'user photo'} style={{height:'400px', width:'500px'}}/>
       <Card.Body>
           {photo.imageName && <Card.Title>{photo.imageName}</Card.Title>}
           <Card.Text>{photo.caption}</Card.Text>
-          <Button variant='primary' onClick={showUpdate}>Update</Button>
-          <Button variant='secondary' onClick={deleteClick}>Delete</Button>
+          <Stack direction="horizontal" gap={2}>
+            <Button variant='primary' onClick={showUpdate}>Update</Button>
+            <Button variant='secondary' onClick={deleteClick}>Delete</Button>
+          </Stack>
       </Card.Body>
   </Card>
 
@@ -87,12 +89,11 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
           <Modal.Title>Update Image</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          
+        
             <Form.Floating className='mb-3'>
               <Form.Control id='imageName' name='imageName' type='input' defaultValue={photo.imageName} onChange={handleChange}/>
               <label htmlFor='imageName'>Image Name: </label>
             </Form.Floating>
-            <InputGroup className='mb-3'>
             <IKContext publicKey="public_33FjszinEBzlgrIz8+HbC3JVASM=" urlEndpoint="https://ik.imagekit.io/jfpi8d5c5/capstone" authenticationEndpoint={imageKitAuthUrl}>
             <IKUpload style={{display:'none'}}
               folder={'/capstone'}
@@ -101,12 +102,15 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
               inputRef={inputRefTest}
               ref={ikUploadRefTest}
             />
+             </IKContext>
+            <InputGroup className='mb-3'>
+           
              {inputRefTest && <Button onClick={() => inputRefTest?.current?.click()}>
                   Upload
               </Button>}
-          </IKContext>
          
-            <Form.Floating className='mb-3'>
+         
+            <Form.Floating>
               <Form.Control id='imageUrl' name='imageUrl' type='input' defaultValue={currImg} value={currImg} disabled/>
               <label htmlFor='imageUrl'>Image Url: </label>
             </Form.Floating>
@@ -117,9 +121,10 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
             </Form.Floating>
         </Modal.Body>
         <Modal.Footer>
-       
-          <Button variant='secondary' onClick={hideUpdate}>Close</Button>
-          <Button variant='primary' onClick={handleSubmit}>Save</Button>
+          <Stack direction="horizontal" gap={2}>
+            <Button variant='secondary' onClick={hideUpdate}>Close</Button>
+            <Button variant='primary' onClick={handleSubmit}>Save</Button>
+          </Stack>
         </Modal.Footer>
     </Modal>
   </>

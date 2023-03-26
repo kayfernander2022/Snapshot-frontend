@@ -2,7 +2,8 @@ import React from "react";
 import User from '../models/user';
 import { useAuthContext } from "../useAuthCtx";
 import { useNavigate } from 'react-router-dom';
-
+import Form from 'react-bootstrap/Form';
+import { Button, Stack } from 'react-bootstrap';
 export interface ILoginPageProps {
   
 }
@@ -82,44 +83,52 @@ const handleLogin = (event: any) => {
       })
   }
 
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    // console.log(JSON.stringify(formData));
+    // if(currentUser)
+    // {
+    //   updatePhotoAction({url, photo: formData})
+    // }
+    // hideUpdate();
+    // navigate(`/${currentUser?.id}/myphotos`);
+  }
+//   <Form.Floating className='mb-3'>
+//   <Form.Control id='name' name='name' type='input' onChange={handleChange}/>
+//     <label htmlFor='name'>Display Name: </label>
+// </Form.Floating>
   return (
   <>
     {hasAccount && <div className='login'>
-      <form onSubmit={handleLogin}>
-            <h5>Log In</h5>
-                <input
-                    type="text"
-                    name="username"
-                    onChange={handleChange}
-                    placeholder="Username"
-                />
-                <input
-                    type="password"
-                    name="password"
-                    onChange={handleChange}
-                    placeholder='Password'
-                />
-                <input type="submit" value="Login" />
-            </form>
-            <button onClick={() => setHasAccount(!hasAccount)}>Sign-up</button>
+        <Form.Floating className='mb-3'>
+            <Form.Control id='username' name='username' type='input' onChange={handleChange}/>
+              <label htmlFor='username'>Username: </label>
+        </Form.Floating>
+        <Form.Floating className='mb-3'>
+            <Form.Control id='password' name='password' type='input' onChange={handleChange}/>
+              <label htmlFor='password'>Password: </label>
+        </Form.Floating>
+        <div className='float-right'>
+        <Stack direction="horizontal" gap={2}>
+        <Button variant='primary' onClick={handleLogin}>Login</Button>
+        <Button variant='secondary' onClick={() => setHasAccount(!hasAccount)}>Sign-up</Button>
+        </Stack>
+        </div>
       </div>}
     {!hasAccount && <div className='signup'>
-    <form onSubmit={handleSignup}>
-          <h5>Sign Up</h5>
-              <input
-                  type="text"
-                  name="username"
-                  onChange={handleChange}
-                  placeholder="Username"
-              />
-              <input
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  placeholder='Password'
-              />
-              <input type="submit" value="Signup" />
-        </form>
+    <Form.Floating className='mb-3'>
+    <Form.Control id='name' name='name' type='input' onChange={handleChange}/>
+    <label htmlFor='name'>Display Name: </label>    
+     </Form.Floating>
+    <Form.Floating className='mb-3'>
+            <Form.Control id='username' name='username' type='input' onChange={handleChange}/>
+              <label htmlFor='username'>Username: </label>
+        </Form.Floating>
+        <Form.Floating className='mb-3'>
+            <Form.Control id='password' name='password' type='input' onChange={handleChange}/>
+              <label htmlFor='password'>Password: </label>
+        </Form.Floating>
+        <Button variant='primary' onClick={handleSignup}>Sign-up</Button>
       </div>}  
       </>
 )

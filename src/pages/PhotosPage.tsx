@@ -3,7 +3,7 @@ import { PhotoPortfolio } from "../components/photos";
 import Photos from "../models/photos";
 import Form from 'react-bootstrap/Form';
 import { useLoaderData } from "react-router-dom";
-import { Button, InputGroup } from "react-bootstrap";
+import { Button, InputGroup, Stack } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
 import { useAuthContext } from "../useAuthCtx";
 import { createPhotoAction } from "../actions/photoActions";
@@ -70,18 +70,22 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
   const ikUploadRefTest = useRef(null);
 
   return (<div style={{justifyContent:'center', alignItems:'center', display:'flex', position:'absolute', width:'100%', height:'100%'}}>
-    <Button onClick={showCreate}>Upload New Photo</Button>
+    <Stack>
+    <div style={{width:'100%', marginTop:'100px'}}>
+    <Button style={{width:'100%'}} onClick={showCreate}>Upload New Photo</Button>
+    </div>
+    <div>
     <PhotoPortfolio photos={photos}/>
     <Modal show={showModal} onHide={hideCreate} backdrop='static' size='lg' centered>
        <Modal.Header closeButton>
-          <Modal.Title>Update Image</Modal.Title>
+          <Modal.Title>Upload New Image</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form.Floating className='mb-3'>
               <Form.Control id='imageName' name='imageName' type='input'/>
               <label htmlFor='imageName'>Image Name: </label>
             </Form.Floating>
-            <InputGroup className='mb-3'>
+           
             <IKContext publicKey="public_33FjszinEBzlgrIz8+HbC3JVASM=" urlEndpoint="https://ik.imagekit.io/jfpi8d5c5/capstone" authenticationEndpoint={imageKitAuthUrl}>
             <IKUpload style={{display:'none'}}
               folder={'/capstone'}
@@ -89,12 +93,13 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
               onSuccess={(response)=>{onSuccess(response)}}
               inputRef={inputRefTest}
               ref={ikUploadRefTest}
-            />
+            /> </IKContext>
+             <InputGroup className='mb-3'>
               {inputRefTest && <Button onClick={() => inputRefTest?.current?.click()}>
                   Upload
               </Button>}
-              </IKContext>
-              <Form.Floating className='mb-3'>
+             
+              <Form.Floating>
               <Form.Control id='imageUrl' name='imageUrl' type='input' value={currImg} onChange={handleChange} disabled/>
               <label htmlFor='imageUrl'>Image Url: </label>
               </Form.Floating>
@@ -105,10 +110,14 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
             </Form.Floating>
         </Modal.Body>
         <Modal.Footer>
+        <Stack direction="horizontal" gap={2}>
           <Button variant='secondary' onClick={hideCreate}>Close</Button>
           <Button variant='primary' onClick={handleSubmit}>Save</Button>
+        </Stack>
         </Modal.Footer>
     </Modal>
+    </div>
+    </Stack>
   </div>);
 }
  
