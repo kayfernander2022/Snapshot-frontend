@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { Outlet, useOutletContext } from 'react-router-dom';
 import { AuthProvider } from "../useAuthCtx";
 import { TopNav } from "../components/topNav";

@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import { useAuthContext } from '../../useAuthCtx'
-import User from '../../models/user'
 
 export interface INavProps{
 }
@@ -25,7 +24,7 @@ export const NavMenu: React.FC<INavProps> = (props: INavProps) => {
       }
     }
     setLoggedIn(currentUser ? currentUser?.token !== undefined : false)
-  }, [currentUser, currentUser?.token])
+  }, [currentUser, currentUser?.token, setUserContext])
 
   return (
       <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Col } from 'react-bootstrap'
 import FriendCard from './friendCard'
 import Friend from '../../models/friend'
 import './style.scss'

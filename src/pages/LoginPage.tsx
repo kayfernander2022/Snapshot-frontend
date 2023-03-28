@@ -83,20 +83,6 @@ const handleLogin = (event: any) => {
       })
   }
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    // console.log(JSON.stringify(formData));
-    // if(currentUser)
-    // {
-    //   updatePhotoAction({url, photo: formData})
-    // }
-    // hideUpdate();
-    // navigate(`/${currentUser?.id}/myphotos`);
-  }
-//   <Form.Floating className='mb-3'>
-//   <Form.Control id='name' name='name' type='input' onChange={handleChange}/>
-//     <label htmlFor='name'>Display Name: </label>
-// </Form.Floating>
   return (
   <>
     {hasAccount && <div className='login'>

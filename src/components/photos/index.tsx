@@ -6,13 +6,6 @@ import './style.scss'
 
 export const PhotoPortfolio: React.FC<{ photos: Photo[] }> = props => {
   const sampleImage: string = 'https://ik.imagekit.io/jfpi8d5c5/capstone/default-image.jpg?updatedAt=1679757673963';
-  const [modalIsOpen, setModal] = useState(false)
-    const [selectedId, setSelected] = useState(0)
-
-    const toggleModal = (selectedId: number) => {
-        setModal(!modalIsOpen)
-        setSelected(selectedId)
-    }
 
   const images: object[] = []
   const makePath = (image: string) => {
@@ -30,7 +23,6 @@ export const PhotoPortfolio: React.FC<{ photos: Photo[] }> = props => {
                     md={6}
                     className="mb-4"
                     key={photo.id}
-                    onClick={() => toggleModal(i)}
                 >
                     <PhotoCard {...photo} />
                 </Col>

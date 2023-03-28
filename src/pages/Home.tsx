@@ -1,9 +1,7 @@
 import React from "react";
-import { Container } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { Container } from 'react-bootstrap';
 import Typed from '../typed/index';
-import './homeStyle.scss'
+import './homeStyle.scss';
 
 export interface IHomeProps {
   headline?: string

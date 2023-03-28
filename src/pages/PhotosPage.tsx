@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, { useState, useRef} from "react";
 import { PhotoPortfolio } from "../components/photos";
 import Photos from "../models/photos";
 import Form from 'react-bootstrap/Form';
@@ -49,7 +49,6 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
 
   const showCreate = (event: React.MouseEvent<HTMLButtonElement>) => {
     setShowModal(true);
-    // navigate(`/${currentUser?.id}/myphotos/${photo.id}/update`);
   }
 
   const hideCreate = () => {

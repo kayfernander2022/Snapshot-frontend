@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Col } from 'react-bootstrap'
 import UserViewCard from './userCard'
 import UserView from '../../models/userView'
 import './style.scss'
