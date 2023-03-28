@@ -14,7 +14,7 @@ export const AuthProvider: React.FC<any> =({children}) => {
   const [currentUser, setUserContext] = React.useState<User | undefined>(undefined);
 
   return (
-    <AuthContext.Provider value={{url:'http://localhost:4040', currentUser, setUserContext}}>
+    <AuthContext.Provider value={{url:'https://snapshot-f9oq.onrender.com', currentUser, setUserContext}}>
       {children}
     </AuthContext.Provider>
   );

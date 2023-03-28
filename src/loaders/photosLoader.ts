@@ -1,7 +1,7 @@
 import Photos from "../models/photos";
 import { LoaderFunctionArgs } from 'react-router-dom';
 
-const URL = 'http://localhost:4040';
+const URL = 'https://snapshot-f9oq.onrender.com';
 
 export const userPhotosLoader = async ({params}: LoaderFunctionArgs):Promise<Photos[]> => {
   
