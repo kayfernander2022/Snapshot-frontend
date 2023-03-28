@@ -7,7 +7,8 @@ import UserView from "../models/userView";
 export interface IFriendsPageProps {
   
 }
- 
+
+//testing 
 const FriendsPage: React.FunctionComponent<IFriendsPageProps> = () => {
   const friends:Friend[] = [{
     id:'test',
@@ -18,44 +19,44 @@ const FriendsPage: React.FunctionComponent<IFriendsPageProps> = () => {
     id:'test',
     userId:'test',
     friendId:'test',
-    name:'Karen'
+    name:'Lisa'
   },{
     id:'test',
     userId:'test',
     friendId:'test',
-    name:'Karen'
+    name:'Stacy'
   },{
     id:'test',
     userId:'test',
     friendId:'test',
-    name:'Karen'
+    name:'Nya'
   },{
     id:'test',
     userId:'test',
     friendId:'test',
-    name:'Karen'
+    name:'Leah'
   },{
     id:'test',
     userId:'test',
     friendId:'test',
-    name:'Karen'
+    name:'Jillian'
   },
   {
     id:'test',
     userId:'test',
     friendId:'test',
-    name:'Karen'
+    name:'Natasha'
   },
   {
     id:'test',
     userId:'test',
     friendId:'test',
-    name:'Karen'
+    name:'Liam'
   }]
 
   const users: UserView[] = [{
     id:'test',
-    name:'Greg'
+    name:'Nathaniel'
   }]
 
   return (<div style={{justifyContent:'center', alignItems:'center', display:'flex', position:'absolute', width:'100%', height:'100%'}}>

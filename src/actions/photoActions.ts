@@ -10,6 +10,8 @@ export interface IDeletePhotoProps{
   photoId: string
 }
 
+
+//Update Action
 export const updatePhotoAction = async({url, photo}:ICreateOrUpdatePhotoProps) => {
  
   if(!url) return;
@@ -23,6 +25,8 @@ export const updatePhotoAction = async({url, photo}:ICreateOrUpdatePhotoProps) =
   })
 }
 
+
+//Create Action
 export const createPhotoAction = async ({ url, photo}:ICreateOrUpdatePhotoProps):Promise<Photos | undefined> => {
   if(!url) return undefined;
 
@@ -39,6 +43,9 @@ export const createPhotoAction = async ({ url, photo}:ICreateOrUpdatePhotoProps)
   return newPhoto;
 }
 
+
+
+//Delete Action
 export const deletePhotoAction = async ({url, photoId}: IDeletePhotoProps) => {
   if(!url) return;
   await fetch(`${url}/api/${photoId}`, {

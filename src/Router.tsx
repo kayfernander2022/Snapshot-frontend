@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import App from "./pages/App";
 import Home from "./pages/Home";
 import PhotosPage from "./pages/PhotosPage";
@@ -8,7 +8,6 @@ import LoginPage from "./pages/LoginPage";
 import LogoutPage from './pages/LogoutPage';
 import ViewPhotoPage from "./pages/ViewPhotoPage";
 import { userPhotosLoader, photoLoader } from "./loaders/photosLoader";
-import { deletePhotoAction } from "./actions/photoActions";
 
 export const Router = createBrowserRouter(
   createRoutesFromElements(

@@ -4,4 +4,6 @@ export default interface Photos{
   imageName?:string;
   caption: string;
   userId: string | undefined;
+  isSharedPhoto?: boolean;
+  sharedFrom?: string;
 }

@@ -9,7 +9,17 @@ export const userPhotosLoader = async ({params}: LoaderFunctionArgs):Promise<Pho
 
   const photos: Photos[] = await response.json();
 
+  const sharedPhotoResponse = await fetch(`${URL}/api/sharedTos/friend/${params.userId}`);
+
+  const sharedPhotos: Photos[] = await sharedPhotoResponse.json();
+
   console.log(JSON.stringify(photos));
+  console.log(JSON.stringify(sharedPhotos));
+
+  sharedPhotos.forEach((sharedPhoto) => {
+    sharedPhoto.isSharedPhoto = true;
+    photos.push(sharedPhoto);
+  })
 
   return photos;
 }

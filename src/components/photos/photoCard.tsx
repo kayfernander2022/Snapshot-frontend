@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { usersLoader } from "../../loaders/usersLoader";
 import SharedTo from '../../models/sharedTo';
+import { shareAction, unshareAction } from '../../actions/shareActions';
 
 export const PhotoCard: React.FC<Photos> = props => {
     const navigate = useNavigate();
@@ -25,9 +26,9 @@ export const PhotoCard: React.FC<Photos> = props => {
     const showShare = (event: React.MouseEvent<HTMLButtonElement>) => {
         setShowModal(true);
         usersLoader(url!).then((users) => {
-            const sharedTos: SharedTo[] = users.map((user) => {
+            const sharedTos: SharedTo[] = users.filter((user => user.id !== currentUser?.id)).map((user) => {
                 return {
-                    photoId: props.id,
+                    photoId: props.id!,
                     user: user,
                     isShared: false
                 }
@@ -42,6 +43,16 @@ export const PhotoCard: React.FC<Photos> = props => {
 
       const handleShare = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
+        const shares: string[] = sharedTos.filter(shared => shared.isShared).map((sharedTo) => {
+            return sharedTo.user.id
+        });
+
+        const unshares = sharedTos.filter(unshared => !unshared.isShared).map((unsharedTo) =>{
+            return unsharedTo.user.id
+        })
+
+        shareAction({url, photoId: props.id!, friendIds: shares })
+        unshareAction({url, photoId: props.id!, friendIds: unshares})
         hideShare();
       }
 
@@ -73,11 +84,14 @@ export const PhotoCard: React.FC<Photos> = props => {
             <Card.Body>
                 {props.imageName && <Card.Title>{props.imageName}</Card.Title>}
                 <Card.Text>{props.caption}</Card.Text>
+                {!props.isSharedPhoto &&
                 <Stack direction="horizontal" gap={2}>
                 <Button variant='primary' onClick={showShare}>Share</Button>
                 <Button variant='secondary' onClick={deleteClick}>Delete</Button>
                 <FontAwesomeIcon icon={faHeart}/>
                 </Stack>
+                }
+                {props.isSharedPhoto && <Card.Text>Shared From: {props.sharedFrom}</Card.Text>}
             </Card.Body>
         </Card>
         <Modal show={showModal} onHide={hideShare} backdrop='static' size='sm' centered>
