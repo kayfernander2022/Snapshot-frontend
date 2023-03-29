@@ -19,10 +19,14 @@ export interface IPhotosPageProps {
 const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
  
   const {url, currentUser} = useAuthContext();
+  const blankFormState = {imageUrl:'', imageName:'', caption:'', userId: currentUser?.id};
   const photos = useLoaderData() as Photos[];
-  const [formData, setFormData] = useState<Photos>({imageUrl:'', imageName:'', caption:'', userId:currentUser?.id});
+  const [formData, setFormData] = useState<Photos>(blankFormState);
   const [currImg, setCurrImg] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [currPhotos, setCurrPhotos] = useState<Photos[]>(photos);
+  const inputRefTest = useRef<HTMLInputElement>(null);
+  const ikUploadRefTest = useRef(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -39,11 +43,13 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
       createPhotoAction({url, photo: formData}).then((photo: Photos | undefined) => {
         if(photo)
         {
-          window.location.reload();
+          setCurrPhotos([...currPhotos, {...photo}])
         }
       })
+      
     }
-
+    setFormData(blankFormState);
+    setCurrImg('');
     hideCreate();
   }
 
@@ -52,6 +58,8 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
   }
 
   const hideCreate = () => {
+    setFormData(blankFormState);
+    setCurrImg('');
     setShowModal(false);
   }
 
@@ -65,8 +73,11 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
     setFormData((formData) => ({...formData, imageUrl:response.url}))
   }
 
-  const inputRefTest = useRef<HTMLInputElement>(null);
-  const ikUploadRefTest = useRef(null);
+  function onDelete(photoDeleted: Photos){
+    setCurrPhotos(currPhotos.filter(photo => photo.id !== photoDeleted.id));
+  }
+
+  
 
   return (<div style={{justifyContent:'center', alignItems:'center', display:'flex', position:'absolute', width:'100%', height:'100%'}}>
     <Stack>
@@ -74,7 +85,7 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
     <Button style={{width:'100%'}} onClick={showCreate}>Upload New Photo</Button>
     </div>
     <div>
-    <PhotoPortfolio photos={photos}/>
+    <PhotoPortfolio photos={currPhotos} onDelete={onDelete}/>
     <Modal show={showModal} onHide={hideCreate} backdrop='static' size='lg' centered>
        <Modal.Header closeButton>
           <Modal.Title>Upload New Image</Modal.Title>

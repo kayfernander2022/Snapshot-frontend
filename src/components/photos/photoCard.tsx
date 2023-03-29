@@ -11,16 +11,18 @@ import { usersLoader } from "../../loaders/usersLoader";
 import SharedTo from '../../models/sharedTo';
 import { shareAction, unshareAction } from '../../actions/shareActions';
 
-export const PhotoCard: React.FC<Photos> = props => {
+export const PhotoCard: React.FC<{photo: Photos, onDelete: (photoDeleted: Photos) => void}> = props => {
     const navigate = useNavigate();
+    const {photo, onDelete} = {...props};
+
     const { url, currentUser } = useAuthContext(); 
-    const imagePath: string = props.imageUrl ? props.imageUrl : ''; 
+    const imagePath: string = photo.imageUrl ? photo.imageUrl : ''; 
     const [showModal, setShowModal] = useState(false);
     const [sharedTos, setSharedTos] = useState<SharedTo[]>([]);
 
     const imgClick = (event: React.MouseEvent<HTMLImageElement>) => {
         event.preventDefault();
-        navigate(`/${currentUser?.id}/myphotos/${props.id}`);
+        navigate(`/${currentUser?.id}/myphotos/${photo.id}`);
     }
 
     const showShare = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,7 +30,7 @@ export const PhotoCard: React.FC<Photos> = props => {
         usersLoader(url!).then((users) => {
             const sharedTos: SharedTo[] = users.filter((user => user.id !== currentUser?.id)).map((user) => {
                 return {
-                    photoId: props.id!,
+                    photoId: photo.id!,
                     user: user,
                     isShared: false
                 }
@@ -51,17 +53,19 @@ export const PhotoCard: React.FC<Photos> = props => {
             return unsharedTo.user.id
         })
 
-        shareAction({url, photoId: props.id!, friendIds: shares })
-        unshareAction({url, photoId: props.id!, friendIds: unshares})
+        shareAction({url, photoId: photo.id!, friendIds: shares })
+        unshareAction({url, photoId: photo.id!, friendIds: unshares})
         hideShare();
       }
 
     const deleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        if(props.id)
+        if(photo.id)
         {
-            deletePhotoAction({url, photoId: props.id});
-            window.location.reload();
+            deletePhotoAction({url, photoId: photo.id});
+            onDelete(photo);
+            
+            // navigate(`${currentUser?.id}\myphotos`)
         }
     }
 
@@ -80,18 +84,18 @@ export const PhotoCard: React.FC<Photos> = props => {
     return (
         <>
         <Card className="shadow-sm">
-            <Card.Img variant="top" src={imagePath} alt={props.imageName || 'user photo'} onClick={imgClick}/>
+            <Card.Img variant="top" src={imagePath} alt={photo.imageName || 'user photo'} onClick={imgClick}/>
             <Card.Body>
-                {props.imageName && <Card.Title>{props.imageName}</Card.Title>}
-                <Card.Text>{props.caption}</Card.Text>
-                {!props.isSharedPhoto &&
+                {photo.imageName && <Card.Title>{photo.imageName}</Card.Title>}
+                <Card.Text>{photo.caption}</Card.Text>
+                {!photo.isSharedPhoto &&
                 <Stack direction="horizontal" gap={2}>
                 <Button variant='primary' onClick={showShare}>Share</Button>
                 <Button variant='secondary' onClick={deleteClick}>Delete</Button>
                 <FontAwesomeIcon icon={faHeart}/>
                 </Stack>
                 }
-                {props.isSharedPhoto && <Card.Text>Shared From: {props.sharedFrom}</Card.Text>}
+                {photo.isSharedPhoto && <Card.Text>Shared From: {photo.sharedFrom}</Card.Text>}
             </Card.Body>
         </Card>
         <Modal show={showModal} onHide={hideShare} backdrop='static' size='sm' centered>
