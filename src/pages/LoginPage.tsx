@@ -58,7 +58,7 @@ const handleLogin = (event: any) => {
       // Clearing the form state
       setForm(blank)
       // Navigating to the home page
-      navigate('/home');
+      navigate('/');
   })
 }
 

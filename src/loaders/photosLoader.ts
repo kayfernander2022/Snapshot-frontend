@@ -3,6 +3,8 @@ import { LoaderFunctionArgs } from 'react-router-dom';
 
 const URL = 'https://snapshot-f9oq.onrender.com';
 
+
+//loader for the index route all photos//
 export const userPhotosLoader = async ({params}: LoaderFunctionArgs):Promise<Photos[]> => {
   
   const response = await fetch(`${URL}/api/photos/user/${params.userId}`);
@@ -24,6 +26,9 @@ export const userPhotosLoader = async ({params}: LoaderFunctionArgs):Promise<Pho
   return photos;
 }
 
+
+
+//loader for the show//
 export const photoLoader = async({params}: LoaderFunctionArgs):Promise<Photos> => {
 
   const response = await fetch(`${URL}/api/photos/${params.photoId}`);

@@ -30,7 +30,7 @@ export const NavMenu: React.FC<INavProps> = (props: INavProps) => {
       <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
           <Nav className="ml-auto" defaultActiveKey="#home">
             {loggedIn && 
-            <LinkContainer to="/Home">
+            <LinkContainer to="/">
               <Nav.Link>
                 Home
               </Nav.Link>

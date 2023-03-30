@@ -3,7 +3,7 @@ import { Navbar } from 'react-bootstrap'
 import { NavbarProps } from 'react-bootstrap'
 import {ScrollSpy} from 'bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import $ from 'jquery'
 import './style.scss'
 import NavMenu, {INavProps} from './navMenu';
@@ -48,7 +48,7 @@ return (
                 className="ml-3 mt-2"
                 style={{marginLeft:'20px'}}
             >
-                <FontAwesomeIcon icon={faGithub} />
+                <FontAwesomeIcon size='4x' icon={faCamera} />
             </Navbar.Brand>
         <NavMenu {...props} />
     </Navbar>

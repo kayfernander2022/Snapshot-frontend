@@ -10,37 +10,7 @@ export interface IFriendsPageProps {
 
 //testing 
 const FriendsPage: React.FunctionComponent<IFriendsPageProps> = () => {
-  const friends:Friend[] = [{
-    id:'test',
-    userId:'test',
-    friendId:'test',
-    name:'Karen'
-  },{
-    id:'test',
-    userId:'test',
-    friendId:'test',
-    name:'Lisa'
-  },{
-    id:'test',
-    userId:'test',
-    friendId:'test',
-    name:'Stacy'
-  },{
-    id:'test',
-    userId:'test',
-    friendId:'test',
-    name:'Nya'
-  },{
-    id:'test',
-    userId:'test',
-    friendId:'test',
-    name:'Leah'
-  },{
-    id:'test',
-    userId:'test',
-    friendId:'test',
-    name:'Jillian'
-  },
+  const friends:Friend[] = [
   {
     id:'test',
     userId:'test',
@@ -55,6 +25,24 @@ const FriendsPage: React.FunctionComponent<IFriendsPageProps> = () => {
   }]
 
   const users: UserView[] = [{
+    id:'test',
+    name:'Karen'
+  },{
+    id:'test',
+    name:'Lisa'
+  },{
+    id:'test',
+    name:'Stacy'
+  },{
+    id:'test',
+    name:'Nya'
+  },{
+    id:'test',
+    name:'Leah'
+  },{
+    id:'test',
+    name:'Jillian'
+  },{
     id:'test',
     name:'Nathaniel'
   }]

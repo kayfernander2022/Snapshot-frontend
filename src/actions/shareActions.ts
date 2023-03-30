@@ -5,7 +5,7 @@ export interface ISharedTo{
 }
 
 
-//Create Action ??
+
 export const shareAction = async ({ url, photoId, friendIds}:ISharedTo):Promise<void> => {
   if(!url) return undefined;
 
@@ -21,7 +21,7 @@ export const shareAction = async ({ url, photoId, friendIds}:ISharedTo):Promise<
 }
 
 
-//Delete Action??
+
 export const unshareAction = async ({ url, photoId, friendIds}:ISharedTo):Promise<void> => {
   if(!url) return undefined;
 
