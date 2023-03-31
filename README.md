@@ -2,7 +2,7 @@
 
 Snapshot is a React + Typescript frontend application where the user can upload, edit, and share photos with friends.
 
-### [Link to Snapshot]() ON NETLIFY
+### [Link to Snapshot](https://snapshot-frontend.netlify.app)
 
 ### Technologies Used
 
@@ -10,31 +10,31 @@ Snapshot is a React + Typescript frontend application where the user can upload,
 - Typescript
 - HTML
 - CSS
+- SCSS
+- React - Bootstrap
 - ImageKit CDN
 
 
 ### Component Architecture
+[![](https://mermaid.ink/img/pako:eNptkk9v4jAQxb9KNCevRCEN4V8OK1FSWlpYaFn2sE0PFjYQbWJHxlHLIr57nXGo3F1ySfLe740zMznCWjIOEWwy-bbeUaW9n3EiPHMNX4ZF8epdXX2_IfNSZ1x_s8ZNpXkjci9zXksjlJ5fEmgl8OpiMZkdFjup5b5GY5RvKzQq91xNWCs_FEh8Rm-RWRnXRqeSMq5cb0xGilPNPQS8mWQ0qw8Y289DG93hWqdSuOk7sjStXgrfoX9vfRtsrcQeafv6ZQgT8ivlb1im1ieoP1xqrxXhfcI--3xAGONui1Z-JKuCXW7x0c4H7f9atOkpiblZ2aX01C4GbSftuY3NyFilXLDz1mao_nDb2ljgn33PyVRu0_OU5nacVLCMo-6iC7JMt6IsanbhsNZw4aeqrizP_-DT18LGsDo0IOcqpykz__Sx0hLQO57zBCLzyKj6k0AiToajpZbLg1hDpFXJG1DiOOOUbhXNIdrQbG_UggqIjvAO0SBoBkG_F4Rd3w87nesGHCAK2p2mPwjCcNANB_0wDE4N-CulyfvNXrff7rX966ATBlUMi_1Gszrx9AHzgQQT?type=png)](https://mermaid.live/edit#pako:eNptkk9v4jAQxb9KNCevRCEN4V8OK1FSWlpYaFn2sE0PFjYQbWJHxlHLIr57nXGo3F1ySfLe740zMznCWjIOEWwy-bbeUaW9n3EiPHMNX4ZF8epdXX2_IfNSZ1x_s8ZNpXkjci9zXksjlJ5fEmgl8OpiMZkdFjup5b5GY5RvKzQq91xNWCs_FEh8Rm-RWRnXRqeSMq5cb0xGilPNPQS8mWQ0qw8Y289DG93hWqdSuOk7sjStXgrfoX9vfRtsrcQeafv6ZQgT8ivlb1im1ieoP1xqrxXhfcI--3xAGONui1Z-JKuCXW7x0c4H7f9atOkpiblZ2aX01C4GbSftuY3NyFilXLDz1mao_nDb2ljgn33PyVRu0_OU5nacVLCMo-6iC7JMt6IsanbhsNZw4aeqrizP_-DT18LGsDo0IOcqpykz__Sx0hLQO57zBCLzyKj6k0AiToajpZbLg1hDpFXJG1DiOOOUbhXNIdrQbG_UggqIjvAO0SBoBkG_F4Rd3w87nesGHCAK2p2mPwjCcNANB_0wDE4N-CulyfvNXrff7rX966ATBlUMi_1Gszrx9AHzgQQT)
 
-[![](https://mermaid.ink/img/pako:eNqFU8luo0AQ_RXUJ0byig0GDiM5Jomy2gn2ZUIOLbo9RmPTiEVZLP_7dFc5rIrCwbjfe1X1qro4klAwTlyy3Yu3cEfTXFt7QazJZ_4yT5JXrd__faEvi3zP819IXChMW-hFxtMztADIewnIUKFDN2IBea1xlyUVppzmvMlqV_XIYZGwruS6IWFc-qkkHkj8nXjD8yWclXoB5eZhHokYuauS20CdOnddch4UqHNo40bfphGPWXbu_AbQW2mu9EYZQ83QxXdtGLcgR7hbHpPd1ZNho9_mu6vl61rGm7rXk53IxdnwPWAPui8vm7P1F_wA8KMacgYMxGRlIeSXbR7vC8yq35ozDNj8GNC-ykccc8z4OwJLADDHSuXozm3TlnRHgW2vlJ2yFGBPCgJvja1F_XNFtvYWeb8R3F5c1Kybmla7K9BEVbtP516-VvkZzhDf3WW_IrtTWVdkfR6kRw48PdCIyc_-qKQByXf8ID258i-j6b-ABPFJ6miRC_8jDombpwXvEezPi-jflB6Iu6X7TKIJjYl7JO_E7ZsjazAbGZZtzhzLMWejaY98ENcwpgPLssb2dGwY9mTinHrkUwiZwhiMpxPTdgzTHjsTGTODfH-AVEVP_wGPE2Ro?type=png)](https://mermaid.live/edit#pako:eNqFU8luo0AQ_RXUJ0byig0GDiM5Jomy2gn2ZUIOLbo9RmPTiEVZLP_7dFc5rIrCwbjfe1X1qro4klAwTlyy3Yu3cEfTXFt7QazJZ_4yT5JXrd__faEvi3zP819IXChMW-hFxtMztADIewnIUKFDN2IBea1xlyUVppzmvMlqV_XIYZGwruS6IWFc-qkkHkj8nXjD8yWclXoB5eZhHokYuauS20CdOnddch4UqHNo40bfphGPWXbu_AbQW2mu9EYZQ83QxXdtGLcgR7hbHpPd1ZNho9_mu6vl61rGm7rXk53IxdnwPWAPui8vm7P1F_wA8KMacgYMxGRlIeSXbR7vC8yq35ozDNj8GNC-ykccc8z4OwJLADDHSuXozm3TlnRHgW2vlJ2yFGBPCgJvja1F_XNFtvYWeb8R3F5c1Kybmla7K9BEVbtP516-VvkZzhDf3WW_IrtTWVdkfR6kRw48PdCIyc_-qKQByXf8ID258i-j6b-ABPFJ6miRC_8jDombpwXvEezPi-jflB6Iu6X7TKIJjYl7JO_E7ZsjazAbGZZtzhzLMWejaY98ENcwpgPLssb2dGwY9mTinHrkUwiZwhiMpxPTdgzTHjsTGTODfH-AVEVP_wGPE2Ro)
+
 
 ### Frontend Route Table
 
 | Route    | Element    | Loader |Action| Description|
 | :---    | :----: | :----:    | :----   |:----   |
-|/        |Index  | photosLoader|         |Display a list of photos|
-|/user/:id | Show | userLoader | | Display user profile info |
-|/user/create | Create | | userCreateAction  | Handles creation form for new user |
-|/user/:id/update | Update | | userUpdateAction | Handles creation form for update user | 
-|/user/:id/delete| Delete | | userDeleteAction| Handles deletion of specific user |
-|/user/:id/addfriend/:friendid| Update | | friendUpdateAction | Action to add friend to friends list |
-|/user/:id/deletefriend/:friendid | Delete | | friendDeleteAction | Action to delete from from friends list
-|/photo/:id |Show   | photoLoader  |          |Display a specific photo|
-|/photo/create  |Create |         | photoCreateAction|Handles submission of create form for photo|
-|/photo/:id/update  |Update |      |photoUpdateAction|Handles submission of update form for photo|
-|/photo/:id/delete |Delete |       |photoDeleteAction|Handles submission of delete form for photo|
-|/sharedphotos        |Index  | sharedPhotosLoader|         |Display a list of friends photos|
-|/sharedphotos/:id/user/:userid        |Update  | |     sharedPhotoUpdateAction    |Share photo to the user|
-|/sharedphotos/:id/user/:userid/delete        |Delete  | |  sharedPhotoDeleteAction       |Delete a shared photo from the user|
+|/        | Home   | |         |Display Home page|
+|/:userId/myPhotos | PhotosPage (Index) | userPhotosLoader | | Display all photos for the user |
+|/:userId/myPhotos | PhotosPage (Create Photo modal) |  | createPhotoAction | Modal to create new photo |
+|/:userId/myPhotos | PhotoCard (Share modal) |  | shareAction, unshareAction | Modal to share and unshare photo to user |
+|/:userId/myphotos/:photoId | ViewPhotoPage (Show) | photoLoader |  | View selected photo |
+|/:userId/myyphotos/:photoId | ViewPhoto (Update Photo modal) |  | updatePhotoAction  | Modal to update details about the photo |
+|/:userId/myyphotos/:photoId | ViewPhoto (Delete Photo button) |  | deletePhotoAction  | Button to delete photo |
+|/:userId/friends/ | FriendsPage (Index) | |  | Show list of users that can be friend or unfriended | 
+|/login| LoginPage | | handleLogin | Handles logging in the user |
+|/logout| Logout | | handleLogout | Handles logging out the user |
+|/signup| SignUp | | handleSignup | Handles creating account for new user |
 
 
 

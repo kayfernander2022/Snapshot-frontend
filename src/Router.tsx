@@ -15,7 +15,6 @@ export const Router = createBrowserRouter(
             <Route path="/" element={<Home/>}/>
             <Route path=":userId/myphotos" element={<PhotosPage/>} loader={userPhotosLoader}/>
             <Route path=":userId/myphotos/:photoId" element={<ViewPhotoPage/>} loader={photoLoader}/>
-            <Route path=":userId/myphotos/:photoId/share" element={<Home/>}/>
             <Route path=":userId/friends" element={<FriendsPage/>}/>
             <Route path="login" element={<LoginPage/>}/>
             <Route path="logout" element={<LogoutPage/>}/>

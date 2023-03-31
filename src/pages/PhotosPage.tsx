@@ -11,6 +11,7 @@ import { IKContext, IKUpload } from "imagekitio-react";
 import { imageKitAuthUrl } from '../urls';
 import { UploadResponse } from "imagekit";
 
+
 export interface IPhotosPageProps {
   
 }
@@ -82,7 +83,7 @@ const PhotosPage: React.FunctionComponent<IPhotosPageProps> = () => {
   return (<div style={{justifyContent:'center', alignItems:'center', display:'flex', position:'absolute', width:'100%', height:'100%'}}>
     <Stack>
     <div style={{width:'100%', marginTop:'100px'}}>
-    <Button style={{width:'100%'}} onClick={showCreate}>Upload New Photo</Button>
+    <Button style={{width:'100%', borderRadius:'0',border:'none', backgroundColor:'rgb(211, 137, 0)'}} onClick={showCreate}>Upload New Photo</Button>
     </div>
     <div>
     <PhotoPortfolio photos={currPhotos} onDelete={onDelete}/>

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import Photos from '../../models/photos'
 import Card from 'react-bootstrap/Card'
-import { Button, InputGroup, Stack } from 'react-bootstrap';
+import { Button, Col, Container, InputGroup, Row, Stack } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +18,7 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
   const [formData, setFormData] = useState(photo);
   const [showModal, setShowModal] = useState(false);
   const [currImg, setCurrImg] = useState(photo.imageUrl);
+  const isSharedPhoto = currentUser?.id !== photo.userId;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -67,29 +68,40 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
     setFormData((formData) => ({...formData, imageUrl:response.url}))
   }
 
+  function goBackClick(event: React.MouseEvent<HTMLButtonElement>){
+    navigate(`/${currentUser?.id}/myphotos`);
+  }
+
   const inputRefTest = useRef<HTMLInputElement>(null);
   const ikUploadRefTest = useRef(null);
 
   return (
-    <>
-    <Card className="shadow-sm">
-      <Card.Img variant="top" src={photo.imageUrl} alt={photo.imageName || 'user photo'} style={{height:'400px', width:'500px'}}/>
+    
+    <Stack>
+    <div style={{width:'100%', marginTop:'100px'}}>
+    <Button style={{width:'100%', borderRadius:'0', border:'none', backgroundColor:'rgb(211, 137, 0)'}} onClick={goBackClick}>Back to My Photos</Button>
+    </div>
+    <Container className="section-wrapper" style={{justifyContent:'center', alignItems:'center', display:'flex', position:'relative', marginRight:'1800px'}}>
+      <Row>
+        <Col>
+    <Card className="shadow-sm" style={{width:'500px', justifyContent:'center', alignItems:'center', display:'flex', position:'absolute'}}>
+      <Card.Img variant="top" src={photo.imageUrl} alt={photo.imageName || 'user photo'} style={{height:'400px', width:'490px'}}/>
       <Card.Body>
           {photo.imageName && <Card.Title>{photo.imageName}</Card.Title>}
           <Card.Text>{photo.caption}</Card.Text>
+          {!isSharedPhoto &&
           <Stack direction="horizontal" gap={2}>
             <Button variant='primary' onClick={showUpdate}>Update</Button>
             <Button variant='secondary' onClick={deleteClick}>Delete</Button>
-          </Stack>
+          </Stack>}
       </Card.Body>
   </Card>
-
+ 
     <Modal show={showModal} onHide={hideUpdate} backdrop='static' size='lg' centered>
        <Modal.Header closeButton>
           <Modal.Title>Update Image</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        
             <Form.Floating className='mb-3'>
               <Form.Control id='imageName' name='imageName' type='input' defaultValue={photo.imageName} onChange={handleChange}/>
               <label htmlFor='imageName'>Image Name: </label>
@@ -127,7 +139,10 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
           </Stack>
         </Modal.Footer>
     </Modal>
-  </>
+    </Col>
+    </Row>
+    </Container>
+    </Stack>
   )
 }
 
