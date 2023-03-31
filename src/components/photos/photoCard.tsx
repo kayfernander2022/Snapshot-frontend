@@ -8,6 +8,7 @@ import { deletePhotoAction } from '../../actions/photoActions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { usersLoader } from "../../loaders/usersLoader";
+import { sharedToLoader } from "../../loaders/shareLoader";
 import SharedTo from '../../models/sharedTo';
 import { shareAction, unshareAction } from '../../actions/shareActions';
 
@@ -27,15 +28,19 @@ export const PhotoCard: React.FC<{photo: Photos, onDelete: (photoDeleted: Photos
 
     const showShare = (event: React.MouseEvent<HTMLButtonElement>) => {
         setShowModal(true);
-        usersLoader(url!).then((users) => {
-            const sharedTos: SharedTo[] = users.filter((user => user.id !== currentUser?.id)).map((user) => {
-                return {
-                    photoId: photo.id!,
-                    user: user,
-                    isShared: false
-                }
-            })
-            setSharedTos(sharedTos);
+        sharedToLoader(url!, photo.id!)
+        .then((friendIds) => 
+        {
+            usersLoader(url!).then((users) => {
+                const sharedTos: SharedTo[] = users.filter((user => user.id !== currentUser?.id)).map((user) => {
+                    return {
+                        photoId: photo.id!,
+                        user: user,
+                        isShared: friendIds.some(id => id === user.id)
+                    }
+                })
+                setSharedTos(sharedTos);
+            });
         });
       }
     
@@ -62,10 +67,9 @@ export const PhotoCard: React.FC<{photo: Photos, onDelete: (photoDeleted: Photos
         event.preventDefault();
         if(photo.id)
         {
-            deletePhotoAction({url, photoId: photo.id});
-            onDelete(photo);
-            
-            // navigate(`${currentUser?.id}\myphotos`)
+            deletePhotoAction({url, photoId: photo.id}).then(() => {
+                onDelete(photo);
+            });
         }
     }
 
@@ -105,7 +109,7 @@ export const PhotoCard: React.FC<{photo: Photos, onDelete: (photoDeleted: Photos
          <Modal.Body>
             <Form>
                 {sharedTos.map((sharedTo) => {
-                    return (<Form.Check type='switch' id={sharedTo.user?.id} label={sharedTo.user?.name} onChange={shareChanged}>
+                    return (<Form.Check type='switch' id={sharedTo.user?.id} label={sharedTo.user?.name} checked={sharedTo.isShared} onChange={shareChanged}>
                     </Form.Check>)
                 })}
             </Form>

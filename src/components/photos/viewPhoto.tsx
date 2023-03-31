@@ -27,11 +27,8 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
     }
   }
 
-  
-
   const showUpdate = (event: React.MouseEvent<HTMLButtonElement>) => {
     setShowModal(true);
-    // navigate(`/${currentUser?.id}/myphotos/${photo.id}/update`);
   }
 
   const hideUpdate = () => {
@@ -42,8 +39,9 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
     event.preventDefault();
     if(photo.id)
     {
-        deletePhotoAction({url, photoId: photo.id});
-        navigate(`/${currentUser?.id}/myphotos`);
+        deletePhotoAction({url, photoId: photo.id}).then(() => {
+          navigate(`/${currentUser?.id}/myphotos`);
+        });
     }
   }
 
@@ -52,10 +50,11 @@ export const ViewPhoto: React.FC<{ photo: Photos}> = props => {
     console.log(JSON.stringify(formData));
     if(currentUser)
     {
-      updatePhotoAction({url, photo: formData})
+      updatePhotoAction({url, photo: formData}).then(() => {
+        hideUpdate();
+        navigate(`/${currentUser?.id}/myphotos`);
+      })
     }
-    hideUpdate();
-    navigate(`/${currentUser?.id}/myphotos`);
   }
 
   function onError(err: Error):void{
